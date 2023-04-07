@@ -9,6 +9,7 @@ import pro.sky.java.course2.EmployeeBook.model.Employee;
 import pro.sky.java.course2.EmployeeBook.service.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employeeBook")
@@ -58,7 +59,7 @@ public class EmployeeBookController {
     }
 
     @GetMapping(path = "/getList")
-    public List<Employee> getList() {
+    public Map<String, Employee> getList() {
         return employeeBookService.getEmployees();
     }
 
