@@ -27,20 +27,22 @@ public class EmployeeBookController {
     }
 
     @GetMapping(path = "/find")
-    public String find(@RequestParam("firstName") String firstName,
-                       @RequestParam("lastName") String lastName) {
+    public String find(@RequestParam("lastName") String lastName,
+                       @RequestParam("firstName") String firstName,
+                       @RequestParam("middleName") String middleName) {
         try {
-            return employeeBookService.find(firstName, lastName).toString() + " в списке сотрудников";
+            return employeeBookService.find(lastName, firstName, middleName).toString() + " в списке сотрудников";
         } catch (EmployeeNotFoundException e) {
             return e.getLocalizedMessage();
         }
     }
 
     @GetMapping(path = "/add")
-    public String add(@RequestParam("firstName") String firstName,
-                      @RequestParam("lastName") String lastName) {
+    public String add(@RequestParam("lastName") String lastName,
+                      @RequestParam("firstName") String firstName,
+                      @RequestParam("middleName") String middleName) {
         try {
-            return employeeBookService.add(firstName, lastName).toString() + " добавлен в список сотрудников.";
+            return employeeBookService.add(lastName, firstName, middleName).toString() + " добавлен в список сотрудников.";
         } catch (EmployeeAlreadyAdded e) {
             return e.getLocalizedMessage();
         } catch (EmployeeStorageIsFullException e) {
@@ -49,10 +51,11 @@ public class EmployeeBookController {
     }
 
     @GetMapping(path = "/remove")
-    public String remove(@RequestParam("firstName") String firstName,
-                         @RequestParam("lastName") String lastName) {
+    public String remove(@RequestParam("lastName") String lastName,
+                         @RequestParam("firstName") String firstName,
+                         @RequestParam("middleName") String middleName) {
         try {
-            return employeeBookService.remove(firstName, lastName).toString() + " удален из списка сотрудников";
+            return employeeBookService.remove(lastName, firstName, middleName).toString() + " удален из списка сотрудников";
         } catch (EmployeeNotFoundException e) {
             return e.getLocalizedMessage();
         }
