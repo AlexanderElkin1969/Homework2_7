@@ -3,6 +3,7 @@ package pro.sky.java.course2.EmployeeBook.service;
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeBookService {
     Employee find(String firstName, String lastName);
@@ -11,6 +12,6 @@ public interface EmployeeBookService {
 
     Employee remove(String firstName, String lastName);
 
-    List<Employee> getEmployees();
+    Map<String, Employee> getEmployees();
 
 }
