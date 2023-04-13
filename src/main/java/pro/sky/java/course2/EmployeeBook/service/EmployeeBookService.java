@@ -2,7 +2,6 @@ package pro.sky.java.course2.EmployeeBook.service;
 
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 
-import java.util.List;
 import java.util.Map;
 
 public interface EmployeeBookService {
