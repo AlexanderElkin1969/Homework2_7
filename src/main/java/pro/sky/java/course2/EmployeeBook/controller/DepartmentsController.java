@@ -16,6 +16,16 @@ public class DepartmentsController {
         this.departmentsService = departmentsService;
     }
 
+    @GetMapping(path = "/max-salary")
+    public String maxSalary(@RequestParam("departmentId") Integer department) {
+        return departmentsService.maxSalary(department);
+    }
+
+    @GetMapping(path = "/min-salary")
+    public String minSalary(@RequestParam("departmentId") Integer department) {
+        return departmentsService.minSalary(department);
+    }
+
     @GetMapping(path = "/all")
     public ArrayList<Employee> allOfDepartment(@RequestParam("departmentId") Integer department) {
         return departmentsService.allOfDepartment(department);
