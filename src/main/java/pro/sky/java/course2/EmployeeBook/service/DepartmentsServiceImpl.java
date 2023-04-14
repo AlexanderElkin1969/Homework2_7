@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,4 +21,10 @@ public ArrayList<Employee> allOfDepartment(Integer dep){
                 .filter(e -> e.getDepartment() ==  dep)
                 .collect(Collectors.toCollection(ArrayList::new));
 }
+@Override
+public ArrayList<Employee> allSortedToDepartment(){
+    return employeeBookService.getEmployees().values().stream()
+                .sorted(Comparator.comparingInt(Employee::hashCode))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 }

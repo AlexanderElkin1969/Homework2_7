@@ -17,16 +17,8 @@ public class Employee {
         this.salary = 100_000 + (int) (Math.random() * 100_001);
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
+    public String getFullName() {
+        return lastName + " " + firstName + " " + middleName;
     }
 
     public int getDepartment() {
@@ -45,13 +37,9 @@ public class Employee {
         this.salary = salary;
     }
 
-    private String getName() {
-        return lastName + " " + firstName + " " + middleName;
-    }
-
     @Override
     public String toString() {
-        return "  ФИО: " + getName() +
+        return "  ФИО: " + getFullName() +
                 "  Отдел: " + department +
                 "  Зарплата: " + salary;
     }
@@ -61,11 +49,12 @@ public class Employee {
         if (this.getClass() != other.getClass()) {
             return false;
         }
-        return this.getName().equals(((Employee) other).getName());
+        return this.getFullName().equals(((Employee) other).getFullName());
     }
 
     @Override
     public int hashCode() {
         return java.util.Objects.hash(department);
     }
+
 }

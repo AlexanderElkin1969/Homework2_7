@@ -6,5 +6,8 @@ import java.util.ArrayList;
 
 public interface DepartmentsService {
 
-public ArrayList<Employee> allOfDepartment(Integer departments);
+public ArrayList<Employee> allOfDepartment(Integer department);
+
+public ArrayList<Employee> allSortedToDepartment();
+
 }
