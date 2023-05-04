@@ -42,9 +42,7 @@ public class EmployeeBookController {
                       @RequestParam("middleName") String middleName) {
         try {
             return employeeBookService.add(lastName, firstName, middleName).toString() + " добавлен в список сотрудников.";
-        } catch (EmployeeAlreadyAdded e) {
-            return e.getLocalizedMessage();
-        } catch (EmployeeStorageIsFullException e) {
+        } catch (EmployeeAlreadyAdded | EmployeeStorageIsFullException e) {
             return e.getLocalizedMessage();
         }
     }
