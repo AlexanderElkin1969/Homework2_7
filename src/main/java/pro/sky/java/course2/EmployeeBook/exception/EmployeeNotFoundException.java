@@ -1,4 +1,4 @@
-package pro.sky.java.course2.EmployeeBook.service;
+package pro.sky.java.course2.EmployeeBook.exception;
 
 public class EmployeeNotFoundException extends RuntimeException {
 

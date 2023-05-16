@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeAlreadyAddedException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeNotFoundException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeStorageIsFullException;
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 import pro.sky.java.course2.EmployeeBook.service.*;
 
@@ -42,7 +45,7 @@ public class EmployeeBookController {
                       @RequestParam("middleName") String middleName) {
         try {
             return employeeBookService.add(lastName, firstName, middleName).toString() + " добавлен в список сотрудников.";
-        } catch (EmployeeAlreadyAdded | EmployeeStorageIsFullException e) {
+        } catch (EmployeeAlreadyAddedException | EmployeeStorageIsFullException e) {
             return e.getLocalizedMessage();
         }
     }

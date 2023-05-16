@@ -1,6 +1,9 @@
 package pro.sky.java.course2.EmployeeBook.service;
 
 import org.springframework.stereotype.Service;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeAlreadyAddedException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeNotFoundException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeStorageIsFullException;
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 
 import java.util.*;
@@ -21,20 +24,6 @@ public class EmployeeBookServiceImpl implements EmployeeBookService {
             "Иванов Иван Александрович", new Employee("Иванов", "Иван", "Александрович"),
             "Иванов Иван Иванович", new Employee("Иванов", "Иван", "Иванович")
     ));
-    /*
-    private static Map<String,Employee> employeeMap = new HashMap<>(Map.of(
-            "Иванов Александр Борисович", new Employee("Иванов", "Александр", "Борисович"),
-            "Егоров Александр Борисович", new Employee("Егоров", "Александр", "Борисович"),
-            "Егоров Александр Александрович", new Employee("Егоров", "Александр", "Александрович"),
-            "Егоров Егор Александрович", new Employee("Егоров", "Егор", "Александрович"),
-            "Егоров Владимир Александрович", new Employee("Егоров", "Владимир", "Александрович"),
-            "Иванов Владимир Александрович", new Employee("Иванов", "Владимир", "Александрович"),
-            "Петров Владимир Александрович", new Employee("Петров", "Владимир", "Александрович"),
-            "Сидоров Владимир Александрович", new Employee("Сидоров", "Владимир", "Александрович"),
-            "Соловьев Владимир Александрович", new Employee("Соловьев", "Владимир", "Александрович"),
-            "Егоров Егор Юрьевич", new Employee("Егоров", "Егор", "Юрьевич")
-    ));
-    */
 
     @Override
     public Employee find(String lastName, String firstName, String middleName) throws EmployeeNotFoundException {
@@ -50,13 +39,13 @@ public class EmployeeBookServiceImpl implements EmployeeBookService {
     }
 
     @Override
-    public Employee add(String lastName, String firstName, String middleName) throws EmployeeAlreadyAdded, EmployeeStorageIsFullException {
+    public Employee add(String lastName, String firstName, String middleName) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
         String str = lastName + " " + firstName + " " + middleName;
         if (employees.size() == MAX_COUNT_EMPLOYEES) {
             throw new EmployeeStorageIsFullException("Список сотрудников переполнен. Число сотрудников по штату не может превышать 30 человек.");
         }
         if (employees.containsKey(str)) {
-            throw new EmployeeAlreadyAdded(str + " уже есть в списке сотрудников.");
+            throw new EmployeeAlreadyAddedException(str + " уже есть в списке сотрудников.");
         }
         Employee buffer = new Employee(lastName, firstName, middleName);
         employees.put(str, buffer);
