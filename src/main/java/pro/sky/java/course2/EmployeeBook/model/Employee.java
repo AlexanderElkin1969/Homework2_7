@@ -1,53 +1,47 @@
 package pro.sky.java.course2.EmployeeBook.model;
 
 public class Employee {
-    private final String firstName;
-    private final String lastName;
 
+    private final String lastName;
+    private final String firstName;
+    private final String middleName;
     private int department;
     private int salary;
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
+
+    public Employee(String lastName, String firstName, String middleName) {
         this.lastName = lastName;
-        this.department = 1;
-        this.salary = 60_000;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.department = 1 + (int) (Math.random() * 3);            //   3 департамента
+        this.salary = 100_000 + (int) (Math.random() * 100_001);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setDepartment(int department) {
-        this.department = department;
+    public String getFullName() {
+        return lastName + " " + firstName + " " + middleName;
     }
 
     public int getDepartment() {
         return department;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
     public int getSalary() {
         return salary;
     }
 
-    private String getFullName() {
-        return firstName + " " + lastName;
+    public void setDepartment(int department) {
+        this.department = department;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @Override
     public String toString() {
-        return "firstName: " + firstName +
-                " lastName: " + lastName +
-                " department: " + department +
-                " salary: " + salary;
+        return "  ФИО: " + getFullName() +
+                "  Отдел: " + department +
+                "  Зарплата: " + salary;
     }
 
     @Override
@@ -60,7 +54,7 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(lastName);
+        return java.util.Objects.hash(department);
     }
 
 }

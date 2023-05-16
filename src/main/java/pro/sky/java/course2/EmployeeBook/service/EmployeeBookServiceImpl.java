@@ -1,6 +1,9 @@
 package pro.sky.java.course2.EmployeeBook.service;
 
 import org.springframework.stereotype.Service;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeAlreadyAddedException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeNotFoundException;
+import pro.sky.java.course2.EmployeeBook.exception.EmployeeStorageIsFullException;
 import pro.sky.java.course2.EmployeeBook.model.Employee;
 
 import java.util.*;
@@ -8,20 +11,23 @@ import java.util.*;
 @Service
 public class EmployeeBookServiceImpl implements EmployeeBookService {
 
-    public static final int MAX_COUNT_EMPLOYEES = 10;
+    public static final int MAX_COUNT_EMPLOYEES = 30;
     private static Map<String, Employee> employees = new HashMap<>(Map.of(
-            "Александр Александров", new Employee("Александр", "Александров"),
-            "Александр Борисов", new Employee("Александр", "Борисов"),
-            "Владимир Борисов", new Employee("Владимир", "Борисов"),
-            "Александр Иванов", new Employee("Александр", "Иванов"),
-            "Иван Иванов", new Employee("Иван", "Иванов"),
-            "Александр Егоров", new Employee("Александр", "Егоров"),
-            "Александр Петров", new Employee("Александр", "Петров")
+            "Александров Александр Александрович", new Employee("Александров", "Александр", "Александрович"),
+            "Александров Борис Александрович", new Employee("Александров", "Борис", "Александрович"),
+            "Борисов Александр Александрович", new Employee("Борисов", "Александр", "Александрович"),
+            "Александров Александр Борисович", new Employee("Александров", "Александр", "Борисович"),
+            "Борисов Борис Александрович", new Employee("Борисов", "Борис", "Александрович"),
+            "Борисов Борис Борисович", new Employee("Борисов", "Борис", "Борисович"),
+            "Александров Александр Иванович", new Employee("Александров", "Александр", "Иванович"),
+            "Иванов Александр Александрович", new Employee("Иванов", "Александр", "Александрович"),
+            "Иванов Иван Александрович", new Employee("Иванов", "Иван", "Александрович"),
+            "Иванов Иван Иванович", new Employee("Иванов", "Иван", "Иванович")
     ));
 
     @Override
-    public Employee find(String firstName, String lastName) throws EmployeeNotFoundException {
-        String str = firstName + " " + lastName;
+    public Employee find(String lastName, String firstName, String middleName) throws EmployeeNotFoundException {
+        String str = lastName + " " + firstName + " " + middleName;
         if (employees.size() == 0) {
             throw new EmployeeNotFoundException("Список сотрудников пуст.");
         }
@@ -33,23 +39,23 @@ public class EmployeeBookServiceImpl implements EmployeeBookService {
     }
 
     @Override
-    public Employee add(String firstName, String lastName) throws EmployeeAlreadyAdded, EmployeeStorageIsFullException {
-        String str = firstName + " " + lastName;
+    public Employee add(String lastName, String firstName, String middleName) throws EmployeeAlreadyAddedException, EmployeeStorageIsFullException {
+        String str = lastName + " " + firstName + " " + middleName;
         if (employees.size() == MAX_COUNT_EMPLOYEES) {
-            throw new EmployeeStorageIsFullException("Список сотрудников переполнен. Число сотрудников по штату не может превышать 10 человек.");
+            throw new EmployeeStorageIsFullException("Список сотрудников переполнен. Число сотрудников по штату не может превышать 30 человек.");
         }
         if (employees.containsKey(str)) {
-            throw new EmployeeAlreadyAdded(str + " уже есть в списке сотрудников.");
+            throw new EmployeeAlreadyAddedException(str + " уже есть в списке сотрудников.");
         }
-        Employee buffer = new Employee(firstName, lastName);
+        Employee buffer = new Employee(lastName, firstName, middleName);
         employees.put(str, buffer);
         return buffer;
     }
 
     @Override
-    public Employee remove(String firstName, String lastName) throws EmployeeNotFoundException {
+    public Employee remove(String lastName, String firstName, String middleName) throws EmployeeNotFoundException {
         Employee buffer;
-        String str = firstName + " " + lastName;
+        String str = lastName + " " + firstName + " " + middleName;
         if (employees.size() == 0) {
             throw new EmployeeNotFoundException("Список сотрудников пуст.");
         }
