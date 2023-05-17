@@ -17,7 +17,7 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     }
 
     @Override
-    public String maxSalary(Integer department) {
+    public String maxSalary(int department) {
         ArrayList<Employee> employees = allOfDepartment(department);
         int size = employees.size();
         if (size == 0) return "В " + department + " отделе нет сотрудников.";
@@ -25,16 +25,16 @@ public class DepartmentsServiceImpl implements DepartmentsService {
     }
 
     @Override
-    public String minSalary(Integer department) {
+    public String minSalary(int department) {
         ArrayList<Employee> employees = allOfDepartment(department);
         if (employees.size() == 0) return "В " + department + " отделе нет сотрудников.";
         return "Минимальная зарплата в " + department + " отделе: " + employees.get(0).toString();
     }
 
     @Override
-    public ArrayList<Employee> allOfDepartment(Integer dep) {
+    public ArrayList<Employee> allOfDepartment(int dep) {
         return employeeBookService.getEmployees().values().stream()
-                .filter(e -> e.getDepartment() == dep)
+                .filter(e -> e.getDepartment() == dep )
                 .sorted(Comparator.comparingInt(Employee::getSalary))
                 .collect(Collectors.toCollection(ArrayList::new));
     }

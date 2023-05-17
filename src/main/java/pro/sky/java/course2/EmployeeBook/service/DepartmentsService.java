@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface DepartmentsService {
 
-    public ArrayList<Employee> allOfDepartment(Integer department);
+    public ArrayList<Employee> allOfDepartment(int department);
 
     public ArrayList<Employee> allSortedToDepartment();
 
-    String maxSalary(Integer department);
+    String maxSalary(int department);
 
-    String minSalary(Integer department);
+    String minSalary(int department);
 }
