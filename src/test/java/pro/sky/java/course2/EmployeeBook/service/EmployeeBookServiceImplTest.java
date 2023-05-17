@@ -13,9 +13,12 @@ public class EmployeeBookServiceImplTest {
 
     @Test
     public void shouldWellWorkWhenValidInput() {
+        int size = out.getEmployees().size();
         Employee result = out.add("Abc", "Abc", "Abc");
         Assertions.assertEquals(out.find("Abc", "Abc", "Abc"), result);
+        Assertions.assertEquals( out.getEmployees().size(), ++size);
         Assertions.assertEquals(out.remove("Abc", "Abc", "Abc"), result);
+        Assertions.assertEquals( out.getEmployees().size(), --size);
     }
 
     @Test
