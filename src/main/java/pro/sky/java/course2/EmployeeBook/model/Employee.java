@@ -9,12 +9,24 @@ public class Employee {
     private int salary;
 
 
-    public Employee(String lastName, String firstName, String middleName) {
+    public Employee(String lastName, String firstName, String middleName, int department, int salary) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
-        this.department = 1 + (int) (Math.random() * 3);            //   3 департамента
-        this.salary = 100_000 + (int) (Math.random() * 100_001);
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
     }
 
     public String getFullName() {
