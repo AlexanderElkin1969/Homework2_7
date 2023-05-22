@@ -56,11 +56,26 @@ public class DepartmentsServiceImplTest {
     }
 
 
+    @ParameterizedTest
+    @MethodSource("employeesWithMinSalaryTestParams")
+    public void employeesWithMinSalaryTest(int department, Employee expected) {
+        Assertions.assertTrue(out.minSalary(department).endsWith(expected.toString()));
+    }
+
+
     public static Stream<Arguments> employeesWithMaxSalaryTestParams() {
         return  Stream.of(
                 Arguments.of( 1, new Employee("Александров", "Борис", "Александрович", 1, 150_000)),
                 Arguments.of( 2, new Employee("Борисов", "Александр", "Александрович", 2, 200_000)),
                 Arguments.of( 3, new Employee("Борисов", "Борис", "Александрович", 3, 130_000))
+        );
+    }
+
+    public static Stream<Arguments> employeesWithMinSalaryTestParams() {
+        return  Stream.of(
+                Arguments.of( 1, new Employee("Александров", "Александр", "Александрович", 1, 100_000)),
+                Arguments.of( 2, new Employee("Борисов", "Александр", "Александрович", 2, 200_000)),
+                Arguments.of( 3, new Employee("Александров", "Александр", "Борисович", 3, 120_000))
         );
     }
 

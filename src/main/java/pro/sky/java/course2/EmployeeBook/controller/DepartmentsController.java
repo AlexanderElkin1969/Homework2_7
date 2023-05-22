@@ -7,7 +7,7 @@ import pro.sky.java.course2.EmployeeBook.service.DepartmentsService;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/employeeBook/departments")
+@RequestMapping("/department")
 public class DepartmentsController {
 
     private final DepartmentsService departmentsService;
@@ -16,22 +16,22 @@ public class DepartmentsController {
         this.departmentsService = departmentsService;
     }
 
-    @GetMapping(path = "/max-salary")
-    public String maxSalary(@RequestParam("departmentId") Integer department) {
-        return departmentsService.maxSalary(department);
+    @GetMapping(path = "/{id}/salary/max")
+    public String maxSalary(@PathVariable int id) {
+        return departmentsService.maxSalary(id);
     }
 
-    @GetMapping(path = "/min-salary")
-    public String minSalary(@RequestParam("departmentId") Integer department) {
-        return departmentsService.minSalary(department);
+    @GetMapping(path = "/{id}/salary/min")
+    public String minSalary(@PathVariable int id) {
+        return departmentsService.minSalary(id);
     }
 
-    @GetMapping(path = "/all")
-    public ArrayList<Employee> allOfDepartment(@RequestParam("departmentId") Integer department) {
-        return departmentsService.allOfDepartment(department);
+    @GetMapping(path = "/{id}/employees")
+    public ArrayList<Employee> allOfDepartment(@PathVariable int id) {
+        return departmentsService.allOfDepartment(id);
     }
 
-    @GetMapping(path = "/all/")
+    @GetMapping(path = "/employees")
     public ArrayList<Employee> allSortedToDepartment() {
         return departmentsService.allSortedToDepartment();
     }
